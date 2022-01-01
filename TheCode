@@ -1,0 +1,39 @@
+local billboardgui = game:GetService("ServerStorage"):WaitForChild("BillboardGui") --Defines the Tag
+
+game.Players.PlayerAdded:Connect(function(player)  --When a Player joins the game
+	
+	player.CharacterAdded:Connect(function(character)
+		
+		
+		if game:GetService("MarketplaceService"):PlayerOwnsAsset(player,26766875) then --If player has my VIP Gamepass
+			local clonedgui = billboardgui:Clone()
+			clonedgui.TextLabel.Text = "VIP Member" --He gets VIP Tag
+			clonedgui.TextLabel.TextColor3 = Color3.fromRGB(0,255,127)
+			clonedgui.Parent = workspace:WaitForChild(player.Name).Head
+		end
+		
+		
+		if player:IsInGroup(13486343) then   --If player in in my Group
+			local clonedgui = billboardgui:Clone()
+			clonedgui.TextLabel.Text = "Group Member" --He gets Group Member Tag
+			clonedgui.TextLabel.TextColor3 = Color3.fromRGB(22,33,255)
+			clonedgui.Parent = workspace:WaitForChild(player.Name).Head
+		end
+		
+		if player.Name == "scary_dinasour" then --If the player is me
+			if character.Head:FindFirstChild("BillboardGui") then --And if I already have a tag
+				local clonedgui = billboardgui:Clone()
+				character.Head.BillboardGui.TextLabel.Text = "Owner" --Change the Tag to Owner
+			else
+				local clonedgui = billboardgui:Clone() --If I don't then same thing.
+				clonedgui.TextLabel.Text = "Owner"
+				clonedgui.TextLabel.TextColor3 = Color3.fromRGB(255,255,0)
+				clonedgui.Parent = workspace:WaitForChild(player.Name).Head
+			end
+	
+		end
+		
+	end)
+	
+end)
+
